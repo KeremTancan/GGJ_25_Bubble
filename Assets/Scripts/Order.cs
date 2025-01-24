@@ -3,20 +3,21 @@ using System;
 [Serializable]
 public struct Order
 {
-    public Item MilkType;
-    public Item TeaType;
-    public Item SugarType;
-    public Item SyrupType;
-    public Item BottleType;
-    public Item CookieType;
+    public Ingredient TapiocaType;
+    public Ingredient MilkType;
+    public Ingredient TeaType;
+    public Ingredient SugarType;
+    public Ingredient SyrupType;
+    public Ingredient BottleType;
+    public Ingredient CookieType;
 
-    public Item[] GetAllIngredients()
+    public Ingredient[] GetAllIngredients()
     {
-        return new Item[] {MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType };
+        return new Ingredient[] {TapiocaType, MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType };
     }
 
     public override string ToString()
     {
-        return $"Milk: {MilkType}, Tea: {TeaType}, Sugar: {SugarType}, Syrup: {SyrupType}, Bottle: {BottleType}, Cookie: {CookieType}";
+        return $"Tapioca: {TapiocaType}, Milk: {MilkType}, Tea: {TeaType}, Sugar: {SugarType}, Syrup: {SyrupType}, Bottle: {BottleType}, Cookie: {CookieType}";
     }
 }

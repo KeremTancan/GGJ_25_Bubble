@@ -5,17 +5,20 @@ using System;
 public class OrderManager : MonoSingleton<OrderManager>
 {
     public Action<Order> OnOrderGenerated;
-    public List<Item> MilkTypes ;
-    public List<Item> TeaTypes ;
-    public List<Item> SugarTypes ;
-    public List<Item> SyrupTypes ;
-    public List<Item> BottleTypes ;
-    public List<Item> CookieTypes;
+
+    public List<Ingredient> TapiocaTypes;
+    public List<Ingredient> MilkTypes ;
+    public List<Ingredient> TeaTypes ;
+    public List<Ingredient> SugarTypes ;
+    public List<Ingredient> SyrupTypes ;
+    public List<Ingredient> BottleTypes ;
+    public List<Ingredient> CookieTypes;
 
     public Order GenerateRandomOrder()
     {
         Order newOrder = new Order
         {
+            TapiocaType = GetRandomElement(TapiocaTypes),
             MilkType = GetRandomElement(MilkTypes),
             TeaType = GetRandomElement(TeaTypes),
             SugarType = GetRandomElement(SugarTypes),
@@ -29,27 +32,39 @@ public class OrderManager : MonoSingleton<OrderManager>
         return newOrder;
     }
 
-    private Item GetRandomElement(List<Item> items)
+    private Ingredient GetRandomElement(List<Ingredient> ingredients)
     {
-        return items[UnityEngine.Random.Range(0, items.Count)];
+        return ingredients[UnityEngine.Random.Range(0, ingredients.Count)];
     }
 
     void OnEnable()
     {
         LoadIngredients();
     }
+
+    void ClearLists()
+    {
+        TapiocaTypes.Clear();
+        MilkTypes.Clear();
+        TeaTypes.Clear();
+        SugarTypes.Clear();
+        SyrupTypes.Clear();
+        BottleTypes.Clear();
+        CookieTypes.Clear();
+    }
     private void LoadIngredients()
     {
+        ClearLists();
         // Load all Ingredient ScriptableObjects from the Resources folder
-        Item[] allIngredients = Resources.LoadAll<Item>("Items");
+        Ingredient[] allIngredients = Resources.LoadAll<Ingredient>("Ingredients");
 
         foreach (var ingredient in allIngredients)
         {
             switch (ingredient.ingredientType)
             {
-                //case IngredientType.Tapioca:
-                  //  TapiocaIngredients.Add(ingredient);
-                    //break;
+                case IngredientType.Tapioca: 
+                    TapiocaTypes.Add(ingredient);
+                    break;
                 case IngredientType.Milk:
                     MilkTypes.Add(ingredient);
                     break;
