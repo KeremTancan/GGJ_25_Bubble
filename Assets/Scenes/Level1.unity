@@ -954,6 +954,8 @@ MonoBehaviour:
   orderUIPrefab: {fileID: 2861130877330251217, guid: 96376e02226a3844a8b94beb99a20900,
     type: 3}
   orderGroup: {fileID: 1557901453}
+  orderParent: {fileID: 714976909}
+  orderParentToggleBtn: {fileID: 1987203492}
 --- !u!1 &1557901452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1107,7 @@ GameObject:
   - component: {fileID: 1987203493}
   - component: {fileID: 1987203492}
   m_Layer: 5
-  m_Name: OrderOpenBtn
+  m_Name: OrderParentToggleBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
