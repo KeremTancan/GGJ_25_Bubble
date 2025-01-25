@@ -2,14 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
+    [SerializeField] List<Customer> customers = new List<Customer>();
     private void OnEnable()
     {
-        GenerateOrder();
+        GenerateCustomer();
     }
 
-    public void GenerateOrder()
+    public void GenerateCustomer()
     {
-        Order newOrder = OrderManager.Instance.GenerateRandomOrder();
-        // Display the order in the UI or pass it to the next part of the game logic
+        GameObject customerGO = new GameObject();
+        var customer = customerGO.AddComponent<Customer>();
+        customers.Add(customer);
     }
 }

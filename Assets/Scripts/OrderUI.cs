@@ -5,14 +5,27 @@ using UnityEngine;
 
 public class OrderUI : MonoBehaviour
 {
+    private Customer customer;
     private Order order;
     //getter setter
+    public Customer GetCustomer()
+    {
+        return customer;
+    }
+
+    public void SetCustomer(Customer customer)
+    {
+        this.customer = customer;
+        SetOrder(customer.GetOrder());
+        //UpdateVisual();
+    }
+    
     public Order GetOrder()
     {
         return order;
     }
 
-    public void SetOrder(Order order)
+    void SetOrder(Order order)
     {
         this.order = order;
         UpdateVisual();

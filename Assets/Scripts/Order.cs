@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public struct Order
+public class Order
 {
     public Ingredient TapiocaType;
     public Ingredient MilkType;

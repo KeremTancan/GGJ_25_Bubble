@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class OrderManager : MonoSingleton<OrderManager>
+public class OrderGenerator : MonoSingleton<OrderGenerator>
 {
-    public Action<Order> OnOrderGenerated;
+    //public Action<Order> OnOrderGenerated;
 
-    public List<Ingredient> TapiocaTypes;
-    public List<Ingredient> MilkTypes ;
-    public List<Ingredient> TeaTypes ;
-    public List<Ingredient> SugarTypes ;
-    public List<Ingredient> SyrupTypes ;
-    public List<Ingredient> BottleTypes ;
-    public List<Ingredient> CookieTypes;
+    [SerializeField] List<Ingredient> TapiocaTypes;
+    [SerializeField] List<Ingredient> MilkTypes ;
+    [SerializeField] List<Ingredient> TeaTypes ;
+    [SerializeField] List<Ingredient> SugarTypes ;
+    [SerializeField] List<Ingredient> SyrupTypes ;
+    [SerializeField] List<Ingredient> BottleTypes ;
+    [SerializeField] List<Ingredient> CookieTypes;
 
     public Order GenerateRandomOrder()
     {
@@ -28,11 +28,11 @@ public class OrderManager : MonoSingleton<OrderManager>
         };
 
         Debug.Log($"New Order: {newOrder}");
-        OnOrderGenerated?.Invoke(newOrder);
+        //OnOrderGenerated?.Invoke(newOrder);
         return newOrder;
     }
 
-    private Ingredient GetRandomElement(List<Ingredient> ingredients)
+    Ingredient GetRandomElement(List<Ingredient> ingredients)
     {
         return ingredients[UnityEngine.Random.Range(0, ingredients.Count)];
     }

@@ -14,16 +14,14 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     protected override void Awake()
     {
         base.Awake();
-        OrderManager.Instance.OnOrderGenerated += OrderManager_OnOrderGenerated;
+        Customer.OnAnyCustomerGenerated += Customer_OnAnyCustomerGenerated;
         orderParentToggleBtn.onClick.AddListener(OrderParentToggle);
     }
 
-    void OrderManager_OnOrderGenerated(Order order)
+    void Customer_OnAnyCustomerGenerated(Customer customer)
     {
-        Debug.Log(order);
         var orderUIGO = Instantiate(orderUIPrefab, orderGroup);
-        orderUIGO.GetComponent<OrderUI>().SetOrder(order);
-
+        orderUIGO.GetComponent<OrderUI>().SetCustomer(customer);
     }
 
     

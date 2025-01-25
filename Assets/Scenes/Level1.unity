@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 419713447}
   - component: {fileID: 419713446}
   m_Layer: 0
-  m_Name: OrderManager
+  m_Name: OrderGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,13 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d172c8d66b4f7b147a2b568816d6908c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TapiocaTypes: []
-  MilkTypes: []
-  TeaTypes: []
-  SugarTypes: []
-  SyrupTypes: []
-  BottleTypes: []
-  CookieTypes: []
 --- !u!4 &419713447
 Transform:
   m_ObjectHideFlags: 0
