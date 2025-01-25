@@ -44,6 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         customers.Remove(finishedCustomer);
         Destroy(finishedCustomer.gameObject);
+        ClearOrder();
     }
 
     bool CheckOrder(Order order, out Customer finishedCustomer)
