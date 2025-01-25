@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Lactos Milk
   ingredientType: 1
-  supplySprite: {fileID: 0}
+  supplySprite: {fileID: 686448361, guid: d3bde69466d334f9fb60987a44c58291, type: 3}
   drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}

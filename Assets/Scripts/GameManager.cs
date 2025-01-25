@@ -6,18 +6,55 @@ using System;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] List<Customer> customers; 
-    public Action<Customer> OnCustomerOrderMade;
+    [SerializeField] List<Transform> spawnPoints;
     
+    private Dictionary<Vector3, bool> spawnPointAvailability;
+    [SerializeField] Customer customerPrefab;
+    
+    public Action<Customer> OnCustomerOrderMade;
     public Action<Order> OnAddedIngredientToDrink;
     
     [SerializeField] bool testOrderFinish = false;
     [SerializeField] Order order;
     
     public Order GetOrder { get { return order; } }
+    protected override void Awake()
+    {
+        base.Awake();
+        spawnPointAvailability = new Dictionary<Vector3, bool>();
+        foreach (var spawnPoint in spawnPoints)
+        {
+            spawnPointAvailability.Add(spawnPoint.position, true); // All spawn points are available initially
+        }
+    }
     private void OnEnable()
     {
         GenerateCustomer();
     }
+
+    
+    private Vector3 GetFirstAvailableSpawnPoint()
+    {
+        foreach (var entry in spawnPointAvailability)
+        {
+            if (entry.Value) // If the spawn point is available
+            {
+                return entry.Key;
+            }
+        }
+
+        return Vector3.negativeInfinity; // No available spawn points
+    }
+
+    private void FreeSpawnPoint(Transform spawnPoint)
+    {
+        if (spawnPointAvailability.ContainsKey(spawnPoint.position))
+        {
+            spawnPointAvailability[spawnPoint.position] = true; // Mark as available
+            Debug.Log($"Spawn point at {spawnPoint.position} is now free.");
+        }
+    }
+
 
     void OnDestroy()
     {
@@ -26,27 +63,31 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void GenerateCustomer()
     {
-        GameObject customerGO = new GameObject();
-        var customer = customerGO.AddComponent<Customer>();
-        customers.Add(customer);
-    }
-
-    /*void Update()
-    {
-        if (testOrderFinish)
+        Vector3 availableSpawnPoint = GetFirstAvailableSpawnPoint();
+    
+        if (availableSpawnPoint != Vector3.negativeInfinity && customers != null && customers.Count < 3)
         {
-            testOrderFinish = false;
-            if (CheckOrder(order, out Customer finishedCustomer))
-            {
-                OnCustomerOrderMade?.Invoke(finishedCustomer);
-                RemoveFinishedCustomer(finishedCustomer);
-            }
+            // Instantiate the customer at the available spawn point
+            Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
+        
+            // Mark the spawn point as occupied
+            spawnPointAvailability[availableSpawnPoint] = false;
+
+            // Add to the customers list (if needed)
+            customers.Add(newCustomer);
+
         }
-    }*/
+        else
+        {
+            Debug.LogWarning("No available spawn points!");
+        }
+        
+    }
 
     void RemoveFinishedCustomer(Customer finishedCustomer)
     {
         customers.Remove(finishedCustomer);
+        FreeSpawnPoint(finishedCustomer.transform);
         Destroy(finishedCustomer.gameObject);
         ClearOrder();
     }
