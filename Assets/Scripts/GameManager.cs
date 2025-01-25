@@ -32,28 +32,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     void FinishOrder(Order order)
     {
-        List<Order> orders = new List<Order>();
         
-        foreach (var customer in customers)
-        {
-            if (customer.GetOrder() != null) // Check if the customer has an order
-            {
-                orders.Add(customer.GetOrder());
-            }
-        }
 
         bool isSuccess = false;
+        Customer finishedCustomer = null;
         
-        foreach (var _order in orders)
+        foreach (var _cust in customers)
         {
-            if (order.IsEqual(_order))
+            if (order.IsEqual(_cust.GetOrder()))
             {
                 isSuccess = true;
-                
+                finishedCustomer = _cust;
             }
         }
         
-        Debug.Log(isSuccess);
+        Debug.Log(isSuccess + " " + finishedCustomer !=null? finishedCustomer.name:"No Customers' order finished");
     }
     
     
