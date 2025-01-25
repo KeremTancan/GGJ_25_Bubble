@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Racoon Cookie
   ingredientType: 6
-  supplySprite: {fileID: 0}
+  supplySprite: {fileID: -1325151497, guid: c668ec114bdba4414ba3afaa5b9e00f8, type: 3}
   drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}

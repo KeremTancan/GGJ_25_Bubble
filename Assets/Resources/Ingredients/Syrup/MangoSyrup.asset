@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Mango Syrup
   ingredientType: 4
-  supplySprite: {fileID: 0}
+  supplySprite: {fileID: -188845297, guid: 1a4ef690db9b541c6b3fff042f910b60, type: 3}
   drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}

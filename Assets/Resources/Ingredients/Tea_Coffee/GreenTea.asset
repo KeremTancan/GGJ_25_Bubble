@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Green Tea
   ingredientType: 2
-  supplySprite: {fileID: 0}
+  supplySprite: {fileID: -1345320933, guid: 7e9d4217bdde3417fa5c1111b636a5bb, type: 3}
   drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}

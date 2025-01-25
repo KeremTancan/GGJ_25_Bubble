@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Decaf Coffee
   ingredientType: 2
-  supplySprite: {fileID: 0}
+  supplySprite: {fileID: -555395637, guid: abd6e02d86c25469ea2c47baf251092b, type: 3}
   drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}
