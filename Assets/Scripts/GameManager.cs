@@ -8,6 +8,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] List<Customer> customers; 
     [SerializeField] List<Transform> spawnPoints;
     
+    [SerializeField] float spawnInterval;
+    
     private Dictionary<Vector3, bool> spawnPointAvailability;
     [SerializeField] Customer customerPrefab;
     
@@ -30,6 +32,19 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnEnable()
     {
         GenerateCustomer();
+    }
+
+    private float timer;
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= spawnInterval)
+        {
+            timer = 0;
+            if (GenerateCustomer())
+            {
+            }
+        }
     }
 
     
@@ -61,7 +76,7 @@ public class GameManager : MonoSingleton<GameManager>
         //customers.Clear();
     }
     
-    public void GenerateCustomer()
+    public bool GenerateCustomer()
     {
         Vector3 availableSpawnPoint = GetFirstAvailableSpawnPoint();
     
@@ -75,20 +90,42 @@ public class GameManager : MonoSingleton<GameManager>
 
             // Add to the customers list (if needed)
             customers.Add(newCustomer);
-
+            return true;
         }
         else
         {
             Debug.LogWarning("No available spawn points!");
+            return false;
         }
         
     }
-
+    public void FinishTestOrder()
+    {
+        if (CheckOrder(order, out Customer finishedCustomer))
+        {
+            RemoveFinishedCustomer(finishedCustomer);
+        }
+        else
+        {
+            foreach (var _cust in customers)
+            {
+                _cust.BeAngry(() =>
+                {
+                    _cust.AddIdleAnimation();
+                });
+            }
+        }
+        
+        //ClearOrder();
+        Debug.Log("Test order finish triggered!");
+    }
     void RemoveFinishedCustomer(Customer finishedCustomer)
     {
-        customers.Remove(finishedCustomer);
-        FreeSpawnPoint(finishedCustomer.transform);
-        Destroy(finishedCustomer.gameObject);
+        OnCustomerOrderMade?.Invoke(finishedCustomer);
+        finishedCustomer.PlayExitingAnimation(true,()=>{
+            customers.Remove(finishedCustomer);
+            FreeSpawnPoint(finishedCustomer.transform);
+            Destroy(finishedCustomer.gameObject);});
         ClearOrder();
     }
 
@@ -218,16 +255,7 @@ public class GameManager : MonoSingleton<GameManager>
         OnAddedIngredientToDrink?.Invoke(order);
     }
     
-    public void FinishTestOrder()
-    {
-        if (CheckOrder(order, out Customer finishedCustomer))
-        {
-            OnCustomerOrderMade?.Invoke(finishedCustomer);
-            RemoveFinishedCustomer(finishedCustomer);
-        }
-        //ClearOrder();
-        Debug.Log("Test order finish triggered!");
-    }
+    
 
     [ContextMenu("Clear Order")]
     public void ClearOrder()

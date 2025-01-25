@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Spine.Unity;
 using Spine;
+using DG.Tweening;
 
 public class Customer: MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Customer: MonoBehaviour
     Order order;
     
     SkeletonAnimation skeletonAnimation;
+    CustomerAnimation customerAnimation;
 
     void Awake()
     {
@@ -23,9 +25,42 @@ public class Customer: MonoBehaviour
         name = "Customer";
         GetOrder();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
-        OnAnyCustomerGenerated?.Invoke(this);
+        customerAnimation = GetComponent<CustomerAnimation>();
+        PlayEnteringAnimation(() =>
+        {
+            OnAnyCustomerGenerated?.Invoke(this);
+        });
     }
 
+    public void PlayEnteringAnimation(Action onComplete)
+    {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce).OnComplete(()=>{onComplete?.Invoke();});
+    }
+
+    public void PlayExitingAnimation(bool isHappy, Action onComplete)
+    {
+        BeHappy(() =>
+        {
+            transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBounce).OnComplete(() => { onComplete?.Invoke(); });
+        });
+    }
+
+    public void AddIdleAnimation()
+    {
+        customerAnimation.AddIdleAnimation();
+    }
+    public void BeAngry(Action onComplete)
+    {
+        customerAnimation.PlayAngryAnimation(onComplete);
+    }
+    
+    public void BeHappy(Action onComplete)
+    {
+        customerAnimation.PlayHappyAnimation(onComplete);
+    }
+    
+    
     void OnEnable()
     {
         ExposedList<Skin> listOfSkins = skeletonAnimation.skeleton.Data.Skins;
@@ -37,7 +72,7 @@ public class Customer: MonoBehaviour
     {
         return skins.Items[UnityEngine.Random.Range(0, skins.Count)];
     }
-
+    
     void OnDestroy()
     {
         //DestroyImmediate(gameObject);

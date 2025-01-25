@@ -6,6 +6,7 @@ public class IngredientButton : MonoBehaviour
 {
     //[SerializeField] private IngredientType ingredientType; // Type of ingredient (Milk, Tapioca, etc.)
     [SerializeField] private Ingredient ingredient;         // ScriptableObject for the ingredient
+    public Ingredient Ingredient { get { return ingredient; } }
     [SerializeField] private Button button;                // Reference to the button
 
     private void Awake()

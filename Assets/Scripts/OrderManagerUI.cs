@@ -17,12 +17,38 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     {
         base.Awake();
         Customer.OnAnyCustomerGenerated += Customer_OnAnyCustomerGenerated;
+        GameManager.Instance().OnCustomerOrderMade += GameManager_OnCustomerOrderMade;
         orderParentToggleBtn.onClick.AddListener(OrderParentToggle);
     }
 
     void OnDestroy()
     {
         Customer.OnAnyCustomerGenerated -= Customer_OnAnyCustomerGenerated;
+        if (GameManager.Instance() != null)
+        {
+            GameManager.Instance().OnCustomerOrderMade -= GameManager_OnCustomerOrderMade;
+        }
+    }
+    
+    void GameManager_OnCustomerOrderMade(Customer finishedCustomer)
+    {
+        OrderUI destroyOrderUI = null;
+        foreach (OrderUI orderUI in orderUIList)
+        {
+            if (orderUI.GetCustomer() == finishedCustomer)
+            {
+                destroyOrderUI = orderUI;
+                break;
+            }
+        }
+
+        if (destroyOrderUI == null)
+        {
+            return;
+        }
+        orderUIList.Remove(destroyOrderUI);
+        Destroy(destroyOrderUI.gameObject);
+        
     }
 
     void Customer_OnAnyCustomerGenerated(Customer customer)
