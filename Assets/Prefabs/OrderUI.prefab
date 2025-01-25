@@ -347,6 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4083520890165339737}
   - component: {fileID: 4178471001102571787}
+  - component: {fileID: 542816253223126825}
   m_Layer: 5
   m_Name: OrderUI
   m_TagString: Untagged
@@ -387,6 +388,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3ef667d01526b4191f618811e99bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &542816253223126825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2861130877330251217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.2
+  duration: 0.2
 --- !u!1 &4196950641980610460
 GameObject:
   m_ObjectHideFlags: 0

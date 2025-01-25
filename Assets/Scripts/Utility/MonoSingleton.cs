@@ -10,24 +10,23 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     /// <summary>
     /// Gets the instance of the singleton.
     /// </summary>
-    public static T Instance
+    /// 
+    public static T Instance(bool canLazyImplement = false)
     {
-        get
+        if (_instance == null)
         {
-            if (_instance == null)
-            {
-                // Try to find the singleton instance in the scene
-                _instance = FindObjectOfType<T>();
+            // Try to find the singleton instance in the scene
+            _instance = FindObjectOfType<T>();
 
-                if (_instance == null)
-                {
-                    // If not found, create a new GameObject with the MonoSingleton
-                    GameObject singletonObject = new GameObject(typeof(T).Name);
-                    _instance = singletonObject.AddComponent<T>();
-                }
+            if (_instance == null && canLazyImplement)
+            {
+                // If not found, create a new GameObject with the MonoSingleton
+                Debug.LogWarning("Lazy loading MonoSingleton " + typeof(T).ToString());
+                GameObject singletonObject = new GameObject(typeof(T).Name);
+                _instance = singletonObject.AddComponent<T>();
             }
-            return _instance;
         }
+        return _instance;
     }
 
     /// <summary>

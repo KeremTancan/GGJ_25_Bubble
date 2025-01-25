@@ -5,6 +5,8 @@ using System;
 public class OrderGenerator : MonoSingleton<OrderGenerator>
 {
     //public Action<Order> OnOrderGenerated;
+    
+    bool isLoaded = false;
 
     [SerializeField] List<Ingredient> TapiocaTypes;
     [SerializeField] List<Ingredient> MilkTypes ;
@@ -16,6 +18,10 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
 
     public Order GenerateRandomOrder()
     {
+        if (!isLoaded)
+        {
+            LoadIngredients();
+        }
         Order newOrder = new Order
         {
             TapiocaType = GetRandomElement(TapiocaTypes),
@@ -44,13 +50,13 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
 
     void ClearLists()
     {
-        TapiocaTypes.Clear();
-        MilkTypes.Clear();
-        TeaTypes.Clear();
-        SugarTypes.Clear();
-        SyrupTypes.Clear();
-        BottleTypes.Clear();
-        CookieTypes.Clear();
+        TapiocaTypes = new List<Ingredient>();
+        MilkTypes = new List<Ingredient>();
+        TeaTypes = new List<Ingredient>();
+        SugarTypes = new List<Ingredient>();
+        SyrupTypes = new List<Ingredient>();
+        BottleTypes = new List<Ingredient>();
+        CookieTypes = new List<Ingredient>();
     }
     private void LoadIngredients()
     {
@@ -87,5 +93,6 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
         }
 
         Debug.Log("Ingredients categorized successfully.");
+        isLoaded = true;
     }
 }

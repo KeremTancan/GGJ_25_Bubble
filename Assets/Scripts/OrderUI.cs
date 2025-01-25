@@ -10,12 +10,15 @@ public class OrderUI : MonoBehaviour
 
     void OnEnable()
     {
-        GameManager.Instance.OnCustomerOrderMade += GameManager_OnCustomerOrderMade;
+        GameManager.Instance().OnCustomerOrderMade += GameManager_OnCustomerOrderMade;
     }
 
     void OnDisable()
     {
-        GameManager.Instance.OnCustomerOrderMade -= GameManager_OnCustomerOrderMade;
+        if (GameManager.Instance() != null)
+        {
+            GameManager.Instance().OnCustomerOrderMade -= GameManager_OnCustomerOrderMade;
+        }
     }
 
     void GameManager_OnCustomerOrderMade(Customer finishedCustomer)

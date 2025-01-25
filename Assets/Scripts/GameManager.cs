@@ -5,7 +5,7 @@ using System;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] List<Customer> customers = new List<Customer>(); 
+    [SerializeField] List<Customer> customers; 
     public Action<Customer> OnCustomerOrderMade;
     
     [SerializeField] bool testOrderFinish = false;
@@ -15,6 +15,11 @@ public class GameManager : MonoSingleton<GameManager>
         GenerateCustomer();
     }
 
+    void OnDestroy()
+    {
+        //customers.Clear();
+    }
+    
     public void GenerateCustomer()
     {
         GameObject customerGO = new GameObject();
