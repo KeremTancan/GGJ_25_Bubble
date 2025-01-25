@@ -162,7 +162,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         testOrderFinish = true;
         Debug.Log("Test order finish triggered!");
-        ClearOrder();
     }
 
     [ContextMenu("Clear Order")]
