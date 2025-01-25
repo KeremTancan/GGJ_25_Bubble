@@ -15,7 +15,7 @@ public class Order
     public Ingredient[] GetAllIngredients()
     {
         //SAKIN DEĞİŞTİRME
-        return new Ingredient[] {TapiocaType, MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType ,IceType};
+        return new Ingredient[] {BottleType,TapiocaType, MilkType, TeaType, SugarType, SyrupType, CookieType ,IceType};
     }
     
 
@@ -30,6 +30,10 @@ public class Order
         var order2Ingredients = order2.GetAllIngredients();
         for (int i = 0; i < order1Ingredients.Length; i++)
         {
+            if (order1Ingredients[i] == null || order2Ingredients[i] == null)
+            {
+                return false;
+            }
             if (order1Ingredients[i].ingredientName != order2Ingredients[i].ingredientName)
             {
                 return false;

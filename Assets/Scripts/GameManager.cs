@@ -8,8 +8,12 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] List<Customer> customers; 
     public Action<Customer> OnCustomerOrderMade;
     
+    public Action<Order> OnAddedIngredientToDrink;
+    
     [SerializeField] bool testOrderFinish = false;
     [SerializeField] Order order;
+    
+    public Order GetOrder { get { return order; } }
     private void OnEnable()
     {
         GenerateCustomer();
@@ -27,7 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
         customers.Add(customer);
     }
 
-    void Update()
+    /*void Update()
     {
         if (testOrderFinish)
         {
@@ -38,7 +42,7 @@ public class GameManager : MonoSingleton<GameManager>
                 RemoveFinishedCustomer(finishedCustomer);
             }
         }
-    }
+    }*/
 
     void RemoveFinishedCustomer(Customer finishedCustomer)
     {
@@ -77,7 +81,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.BottleType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.BottleType.ingredientName}. Cannot change it.");
                 }
                 break;
             
@@ -89,7 +93,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.TapiocaType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.TapiocaType.ingredientName}. Cannot change it.");
                 }
                 break;
             
@@ -101,7 +105,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.IceType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.IceType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -113,7 +117,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.MilkType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.MilkType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -125,7 +129,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.TeaType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.TeaType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -137,7 +141,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.SugarType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.SugarType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -149,7 +153,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.SyrupType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.SyrupType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -161,7 +165,7 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
-                    Debug.LogWarning($"{type} already set to {order.CookieType.ingredientName}. Cannot change it.");
+                    //Debug.LogWarning($"{type} already set to {order.CookieType.ingredientName}. Cannot change it.");
                 }
                 break;
 
@@ -169,11 +173,18 @@ public class GameManager : MonoSingleton<GameManager>
                 Debug.LogError("Unknown ingredient type.");
                 break;
         }
+        
+        OnAddedIngredientToDrink?.Invoke(order);
     }
     
     public void FinishTestOrder()
     {
-        testOrderFinish = true;
+        if (CheckOrder(order, out Customer finishedCustomer))
+        {
+            OnCustomerOrderMade?.Invoke(finishedCustomer);
+            RemoveFinishedCustomer(finishedCustomer);
+        }
+        //ClearOrder();
         Debug.Log("Test order finish triggered!");
     }
 
@@ -188,7 +199,7 @@ public class GameManager : MonoSingleton<GameManager>
         order.SyrupType = null;
         order.BottleType = null;
         order.CookieType = null;
-
+        OnAddedIngredientToDrink?.Invoke(order);
         Debug.Log("Order has been cleared. All ingredients are now null.");
     }
 
