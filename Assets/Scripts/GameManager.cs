@@ -65,98 +65,112 @@ public class GameManager : MonoSingleton<GameManager>
     }
     
     public void SetIngredient(IngredientType type, Ingredient ingredient)
-{
-    switch (type)
     {
-        case IngredientType.Tapioca:
-            if (order.TapiocaType == null)
-            {
-                order.TapiocaType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.TapiocaType.ingredientName}. Cannot change it.");
-            }
-            break;
+        switch (type)
+        {
+            case IngredientType.Tapioca:
+                if (order.TapiocaType == null)
+                {
+                    order.TapiocaType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.TapiocaType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Milk:
-            if (order.MilkType == null)
-            {
-                order.MilkType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.MilkType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Milk:
+                if (order.MilkType == null)
+                {
+                    order.MilkType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.MilkType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Tea_Coffee:
-            if (order.TeaType == null)
-            {
-                order.TeaType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.TeaType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Tea_Coffee:
+                if (order.TeaType == null)
+                {
+                    order.TeaType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.TeaType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Sugar:
-            if (order.SugarType == null)
-            {
-                order.SugarType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.SugarType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Sugar:
+                if (order.SugarType == null)
+                {
+                    order.SugarType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.SugarType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Syrup:
-            if (order.SyrupType == null)
-            {
-                order.SyrupType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.SyrupType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Syrup:
+                if (order.SyrupType == null)
+                {
+                    order.SyrupType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.SyrupType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Bottle:
-            if (order.BottleType == null)
-            {
-                order.BottleType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.BottleType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Bottle:
+                if (order.BottleType == null)
+                {
+                    order.BottleType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.BottleType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        case IngredientType.Cookie:
-            if (order.CookieType == null)
-            {
-                order.CookieType = ingredient;
-                Debug.Log($"Set {ingredient.ingredientName} to {type}");
-            }
-            else
-            {
-                Debug.LogWarning($"{type} already set to {order.CookieType.ingredientName}. Cannot change it.");
-            }
-            break;
+            case IngredientType.Cookie:
+                if (order.CookieType == null)
+                {
+                    order.CookieType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.CookieType.ingredientName}. Cannot change it.");
+                }
+                break;
 
-        default:
-            Debug.LogError("Unknown ingredient type.");
-            break;
+            default:
+                Debug.LogError("Unknown ingredient type.");
+                break;
+        }
     }
-}
+
+    [ContextMenu("Clear Order")]
+    public void ClearOrder()
+    {
+        order.TapiocaType = null;
+        order.MilkType = null;
+        order.TeaType = null;
+        order.SugarType = null;
+        order.SyrupType = null;
+        order.BottleType = null;
+        order.CookieType = null;
+
+        Debug.Log("Order has been cleared. All ingredients are now null.");
+    }
 
     
 }

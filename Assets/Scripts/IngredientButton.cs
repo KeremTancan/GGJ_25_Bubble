@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class IngredientButton : MonoBehaviour
 
         // Add the button click listener
         button.onClick.AddListener(OnButtonClick);
+        button.GetComponent<Image>().sprite = ingredient.supplySprite;
+        button.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
     }
 
     private void OnButtonClick()
