@@ -20,6 +20,11 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
         orderParentToggleBtn.onClick.AddListener(OrderParentToggle);
     }
 
+    void OnDestroy()
+    {
+        Customer.OnAnyCustomerGenerated -= Customer_OnAnyCustomerGenerated;
+    }
+
     void Customer_OnAnyCustomerGenerated(Customer customer)
     {
         var orderUIGO = Instantiate(orderUIPrefab, orderGroup);

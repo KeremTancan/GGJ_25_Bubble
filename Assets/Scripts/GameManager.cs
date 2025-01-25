@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using System;
+
 
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] List<Customer> customers = new List<Customer>(); 
-    
+    public Action<Customer> OnCustomerOrderMade;
     
     [SerializeField] bool testOrderFinish = false;
     [SerializeField] Order order;
@@ -26,16 +27,24 @@ public class GameManager : MonoSingleton<GameManager>
         if (testOrderFinish)
         {
             testOrderFinish = false;
-            FinishOrder(order);
+            if (CheckOrder(order, out Customer finishedCustomer))
+            {
+                OnCustomerOrderMade?.Invoke(finishedCustomer);
+                RemoveFinishedCustomer(finishedCustomer);
+            }
         }
     }
 
-    void FinishOrder(Order order)
+    void RemoveFinishedCustomer(Customer finishedCustomer)
     {
-        
+        customers.Remove(finishedCustomer);
+        Destroy(finishedCustomer.gameObject);
+    }
 
+    bool CheckOrder(Order order, out Customer finishedCustomer)
+    {
         bool isSuccess = false;
-        Customer finishedCustomer = null;
+        finishedCustomer = null;
         
         foreach (var _cust in customers)
         {
@@ -43,10 +52,11 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 isSuccess = true;
                 finishedCustomer = _cust;
+                return isSuccess;
             }
         }
-        
-        Debug.Log(isSuccess + " " + finishedCustomer !=null? finishedCustomer.name:"No Customers' order finished");
+        Debug.Log(isSuccess + " " + (finishedCustomer !=null? finishedCustomer.name:"No Customers' order finished"));
+        return isSuccess;
     }
     
     

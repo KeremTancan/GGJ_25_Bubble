@@ -7,7 +7,25 @@ public class OrderUI : MonoBehaviour
 {
     private Customer customer;
     private Order order;
-    //getter setter
+
+    void OnEnable()
+    {
+        GameManager.Instance.OnCustomerOrderMade += GameManager_OnCustomerOrderMade;
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnCustomerOrderMade -= GameManager_OnCustomerOrderMade;
+    }
+
+    void GameManager_OnCustomerOrderMade(Customer finishedCustomer)
+    {
+        if (GetCustomer() == finishedCustomer)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     public Customer GetCustomer()
     {
         return customer;
