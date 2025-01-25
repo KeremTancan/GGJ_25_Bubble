@@ -5,12 +5,50 @@ using UnityEngine;
 public class TogglePanel : MonoBehaviour
 {
     public GameObject panel;
+
+    private static List<GameObject> panels;
+
+    void Awake()
+    {
+        if (panels == null || panels.Count == 0)
+        {
+            panels = new List<GameObject>();
+            var togglePanels = GameObject.FindObjectsOfType<TogglePanel>();
+            foreach (var tp in togglePanels)
+            {
+                panels.Add(tp.panel);
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (panels != null && panels.Count != 0)
+        {
+            panels.Clear();
+        }
+    }
     
     public void PanelToggle()
     {
-        if (panel != null)  
+        if (panel == null)  
         {
-            panel.SetActive(!panel.activeSelf);
+            return;
+        }
+        
+        bool active = panel.activeSelf;
+
+        if (!active)
+        {
+            foreach (var pnl in panels)
+            {
+                pnl.SetActive(false);
+            }
+            panel.SetActive(true);
+        }
+        else
+        {
+            panel.SetActive(false);
         }
     }
 }
