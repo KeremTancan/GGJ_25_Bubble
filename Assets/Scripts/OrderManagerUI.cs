@@ -9,6 +9,8 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     [SerializeField] Transform orderGroup;
     [SerializeField] Transform orderParent;
     [SerializeField] Button orderParentToggleBtn;
+    
+    [SerializeField] List<OrderUI> orderUIList = new List<OrderUI>();
 
     
     protected override void Awake()
@@ -21,7 +23,9 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     void Customer_OnAnyCustomerGenerated(Customer customer)
     {
         var orderUIGO = Instantiate(orderUIPrefab, orderGroup);
-        orderUIGO.GetComponent<OrderUI>().SetCustomer(customer);
+        var orderUI = orderUIGO.GetComponent<OrderUI>();
+        orderUI.SetCustomer(customer);
+        orderUIList.Add(orderUI);
     }
 
     
