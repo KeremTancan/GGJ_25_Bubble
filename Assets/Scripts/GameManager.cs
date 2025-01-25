@@ -80,6 +80,18 @@ public class GameManager : MonoSingleton<GameManager>
                     Debug.LogWarning($"{type} already set to {order.TapiocaType.ingredientName}. Cannot change it.");
                 }
                 break;
+            
+            case IngredientType.Ice:
+                if (order.IceType == null)
+                {
+                    order.IceType = ingredient;
+                    Debug.Log($"Set {ingredient.ingredientName} to {type}");
+                }
+                else
+                {
+                    Debug.LogWarning($"{type} already set to {order.IceType.ingredientName}. Cannot change it.");
+                }
+                break;
 
             case IngredientType.Milk:
                 if (order.MilkType == null)
@@ -169,6 +181,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void ClearOrder()
     {
         order.TapiocaType = null;
+        order.IceType = null;
         order.MilkType = null;
         order.TeaType = null;
         order.SugarType = null;

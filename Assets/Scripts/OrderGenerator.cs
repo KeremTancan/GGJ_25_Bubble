@@ -9,6 +9,7 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
     bool isLoaded = false;
 
     [SerializeField] List<Ingredient> TapiocaTypes;
+    [SerializeField] List<Ingredient> IceTypes;
     [SerializeField] List<Ingredient> MilkTypes ;
     [SerializeField] List<Ingredient> TeaTypes ;
     [SerializeField] List<Ingredient> SugarTypes ;
@@ -25,6 +26,7 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
         Order newOrder = new Order
         {
             TapiocaType = GetRandomElement(TapiocaTypes),
+            IceType = GetRandomElement(IceTypes),
             MilkType = GetRandomElement(MilkTypes),
             TeaType = GetRandomElement(TeaTypes),
             SugarType = GetRandomElement(SugarTypes),
@@ -51,6 +53,7 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
     void ClearLists()
     {
         TapiocaTypes = new List<Ingredient>();
+        IceTypes = new List<Ingredient>();
         MilkTypes = new List<Ingredient>();
         TeaTypes = new List<Ingredient>();
         SugarTypes = new List<Ingredient>();
@@ -70,6 +73,9 @@ public class OrderGenerator : MonoSingleton<OrderGenerator>
             {
                 case IngredientType.Tapioca: 
                     TapiocaTypes.Add(ingredient);
+                    break;
+                case IngredientType.Ice:
+                    IceTypes.Add(ingredient);
                     break;
                 case IngredientType.Milk:
                     MilkTypes.Add(ingredient);

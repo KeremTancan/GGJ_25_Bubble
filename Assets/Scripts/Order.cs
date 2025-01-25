@@ -4,6 +4,7 @@ using System;
 public class Order
 {
     public Ingredient TapiocaType;
+    public Ingredient IceType;
     public Ingredient MilkType;
     public Ingredient TeaType;
     public Ingredient SugarType;
@@ -14,16 +15,16 @@ public class Order
     public Ingredient[] GetAllIngredients()
     {
         //SAKIN DEĞİŞTİRME
-        return new Ingredient[] {TapiocaType, MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType };
+        return new Ingredient[] {TapiocaType, MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType ,IceType};
     }
     
 
     public override string ToString()
     {
-        return $"Tapioca: {TapiocaType}, Milk: {MilkType}, Tea: {TeaType}, Sugar: {SugarType}, Syrup: {SyrupType}, Bottle: {BottleType}, Cookie: {CookieType}";
+        return $"Tapioca: {TapiocaType}, Ice: {IceType}, Milk: {MilkType}, Tea: {TeaType}, Sugar: {SugarType}, Syrup: {SyrupType}, Bottle: {BottleType}, Cookie: {CookieType}";
     }
 
-    public  bool IsEqual(Order order2)
+    public bool IsEqual(Order order2)
     {
         var order1Ingredients = GetAllIngredients();
         var order2Ingredients = order2.GetAllIngredients();
