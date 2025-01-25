@@ -13,8 +13,10 @@ public class Order
 
     public Ingredient[] GetAllIngredients()
     {
+        //SAKIN DEĞİŞTİRME
         return new Ingredient[] {TapiocaType, MilkType, TeaType, SugarType, SyrupType, BottleType, CookieType };
     }
+    
 
     public override string ToString()
     {
