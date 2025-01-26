@@ -28,6 +28,7 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        layoutElement = GetComponent<LayoutElement>();
         if (layoutElement == null)
         {
             layoutElement = gameObject.AddComponent<LayoutElement>();
