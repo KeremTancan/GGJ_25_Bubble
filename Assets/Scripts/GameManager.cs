@@ -21,6 +21,13 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] Order order;
     
     [SerializeField] Ingredient noIceSO;
+
+
+    public int point = 0;
+
+    public float gameTimer;
+    
+    [SerializeField] float maxTime = 120;
     
     public Order GetOrder { get { return order; } }
     protected override void Awake()
@@ -32,6 +39,8 @@ public class GameManager : MonoSingleton<GameManager>
             spawnPointAvailability.Add(spawnPoint.position, true); // All spawn points are available initially
         }
         ClearOrder();
+        
+        gameTimer = maxTime;
     }
     private void OnEnable()
     {
@@ -50,10 +59,18 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
 
+        
+        gameTimer -= Time.deltaTime;
+        if (gameTimer <= 0)
+        {
+            if (point > PlayerPrefs.GetInt("BestScore")) {
+                PlayerPrefs.SetInt("BestScore", point);
+            }
+            SceneManager.LoadScene("MainMenu");
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("AAAAAA");
             SceneManager.LoadScene("MainMenu");
         }
     }
@@ -113,9 +130,11 @@ public class GameManager : MonoSingleton<GameManager>
         if (CheckOrder(order, out Customer finishedCustomer))
         {
             RemoveFinishedCustomer(finishedCustomer);
+            point += 100;
         }
         else
         {
+            point = Math.Max(0, point - 10);
             foreach (var _cust in customers)
             {
                 _cust.BeAngry(() =>
@@ -141,6 +160,7 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void RemoveWaitedCustomer(Customer waitedCustomer)
     {
+        point  = Math.Max(0, point - 25);
         OnCustomerOrderMade?.Invoke(waitedCustomer); 
         waitedCustomer.PlayExitingAnimation(false, () =>
         {
