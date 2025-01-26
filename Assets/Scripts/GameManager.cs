@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoSingleton<GameManager>
@@ -81,31 +82,58 @@ public class GameManager : MonoSingleton<GameManager>
     }
     
     public bool GenerateCustomer()
-    {
-        Vector3 availableSpawnPoint = GetFirstAvailableSpawnPoint();
-    
-        if (availableSpawnPoint != Vector3.negativeInfinity && customers != null && customers.FindAll(e => e!=null).Count < 3)
-        {
-            // Instantiate the customer at the available spawn point
-            Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
-            
-            int xCoord = (int)availableSpawnPoint.x;
-            newCustomer.index = Math.Sign(xCoord)+1;
-        
-            // Mark the spawn point as occupied
-            spawnPointAvailability[availableSpawnPoint] = false;
+{
+    Vector3 availableSpawnPoint = GetFirstAvailableSpawnPoint();
 
-            // Add to the customers list (if needed)
-            customers.Add(newCustomer);
-            return true;
+    if (availableSpawnPoint != Vector3.negativeInfinity && customers != null && customers.FindAll(e => e != null).Count < 3)
+    {
+        // Instantiate the customer at the available spawn point
+        Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
+
+        // Calculate the index based on the spawn point's x-coordinate
+        int xCoord = (int)availableSpawnPoint.x;
+        newCustomer.index = Math.Sign(xCoord) + 1;
+
+        // Assign the corresponding waiting bar from TimeManagerUI
+        Transform customerWaitingParent = TimeManagerUI.Instance(false).transform.Find("CustomerWaitingParent");
+        if (customerWaitingParent != null && newCustomer.index >= 0 && newCustomer.index < customerWaitingParent.childCount)
+        {
+            Transform waitingBarTransform = customerWaitingParent.GetChild(newCustomer.index);
+            newCustomer.waitingBar = waitingBarTransform.GetComponent<Image>();
+
+            // Initialize the waiting bar's state
+            if (newCustomer.waitingBar != null)
+            {
+                newCustomer.waitingBar.fillAmount = 1f;
+            }
         }
         else
         {
-            Debug.LogWarning("No available spawn points!");
-            return false;
+            Debug.LogWarning("No matching waiting bar found for customer index: " + newCustomer.index);
         }
-        
+
+        // Mark the spawn point as occupied
+        spawnPointAvailability[availableSpawnPoint] = false;
+
+        // Müşteri yok olduğunda spawn noktasını boşalt
+        newCustomer.OnCustomerDestroyed += () =>
+        {
+            spawnPointAvailability[availableSpawnPoint] = true; // Spawn noktası tekrar kullanılabilir
+            customers.Remove(newCustomer); // Müşteriyi listeden kaldır
+        };
+
+        // Add the new customer to the list
+        customers.Add(newCustomer);
+        return true;
     }
+    else
+    {
+        Debug.LogWarning("No available spawn points!");
+        return false;
+    }
+}
+
+
     public void FinishTestOrder()
     {
         if (CheckOrder(order, out Customer finishedCustomer))
@@ -136,13 +164,39 @@ public class GameManager : MonoSingleton<GameManager>
             Destroy(finishedCustomer.gameObject);});
     }
 
+    
     public void RemoveWaitedCustomer(Customer waitedCustomer)
     {
-        OnCustomerOrderMade?.Invoke(waitedCustomer);
-        waitedCustomer.PlayExitingAnimation(false,()=>{
-            FreeSpawnPoint(waitedCustomer.transform);
-            Destroy(waitedCustomer.gameObject);});
+        OnCustomerOrderMade?.Invoke(waitedCustomer); 
+        
+        FreeSpawnPoint(waitedCustomer.transform); 
+
+        waitedCustomer.PlayExitingAnimation(false, () =>
+        {
+            Destroy(waitedCustomer.gameObject); 
+        });
+
+        customers.Remove(waitedCustomer);
     }
+
+
+
+
+    public void RemoveFailedOrder(Order failedOrder)
+    {
+        Debug.Log($"Removing failed order: {failedOrder}");
+
+        foreach (var _cust in customers)
+        {
+            if (_cust.GetOrder() == failedOrder)
+            {
+                RemoveWaitedCustomer(_cust); 
+                break;
+            }
+        }
+    }
+
+
     
     
 

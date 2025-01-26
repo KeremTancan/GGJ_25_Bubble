@@ -55,8 +55,8 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
         }
         orderUIList.Remove(destroyOrderUI);
         Destroy(destroyOrderUI.gameObject);
-        
     }
+
 
     void Customer_OnAnyCustomerGenerated(Customer customer)
     {
