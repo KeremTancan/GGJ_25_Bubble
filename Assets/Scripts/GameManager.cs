@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -49,6 +49,13 @@ public class GameManager : MonoSingleton<GameManager>
             {
             }
         }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("AAAAAA");
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     
@@ -89,6 +96,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         // Instantiate the customer at the available spawn point
         Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
+        spawnPointAvailability[availableSpawnPoint] = false;
         customers.Add(newCustomer);
         return true;
     }
@@ -134,15 +142,11 @@ public class GameManager : MonoSingleton<GameManager>
     public void RemoveWaitedCustomer(Customer waitedCustomer)
     {
         OnCustomerOrderMade?.Invoke(waitedCustomer); 
-        
-        FreeSpawnPoint(waitedCustomer.transform); 
-
         waitedCustomer.PlayExitingAnimation(false, () =>
         {
+            FreeSpawnPoint(waitedCustomer.transform); 
             Destroy(waitedCustomer.gameObject); 
         });
-
-        customers.Remove(waitedCustomer);
     }
 
     bool CheckOrder(Order order, out Customer finishedCustomer)

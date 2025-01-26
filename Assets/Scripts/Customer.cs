@@ -11,6 +11,7 @@ public class Customer : MonoBehaviour
     public static Action<Customer> OnAnyCustomerGenerated;
     public static Action<Customer> OnCustomerDestroyedWithOrder; // Yeni event: Order'ı silmek için
 
+    public float minWaitingTime = 22f;
     public float maxWaitingTime = 22f;
     private float remainingWaitingTime;
     private bool isWaiting = true;
@@ -168,26 +169,14 @@ public class Customer : MonoBehaviour
             }
         }
 
-        if (remainingWaitingTime <= 0)
+        if (isWaiting && remainingWaitingTime <= 0)
         {
             isWaiting = false;
-
+            waitingBarGO.SetActive(false);
             GameManager.Instance(false).RemoveWaitedCustomer(this);
         }
     }
 
-    public void DeliverOrder()
-    {
-        waitingBarGO.SetActive(false);
-        isWaiting = false;
-
-        // Mutlu müşteri animasyonu oynat ve yok et
-        PlayExitingAnimation(true, () =>
-        {
-            OnCustomerDestroyed?.Invoke();
-            Destroy(gameObject);
-        });
-    }
 
     // Yüz ifadesi sprite'larını almak için metotlar
     private Sprite GetHappyFace()

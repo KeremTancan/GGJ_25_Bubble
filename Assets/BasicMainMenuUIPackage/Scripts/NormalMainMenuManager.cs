@@ -31,15 +31,17 @@ public class NormalMainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        if(PlayerPrefs.HasKey("Tutorial"))
+        
+        SceneManager.LoadScene("Level1");
+        /*if(PlayerPrefs.HasKey("Tutorial"))
         {
             SceneManager.LoadScene("Level1");
 
         }
         else{
             
-            SceneManager.LoadScene("TutorialLevel");
-        }
+            SceneManager.LoadScene("Level1");
+        }*/
 
         
     }

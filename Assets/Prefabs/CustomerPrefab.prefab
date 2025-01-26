@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee01996b90a14594c8fddd7488579ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaitingTime: 22
+  minWaitingTime: 30
+  maxWaitingTime: 60
   index: -1
-  waitingBar: {fileID: 0}
+  waitingBarGO: {fileID: 0}

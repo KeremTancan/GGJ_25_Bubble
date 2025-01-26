@@ -63,7 +63,7 @@ public class LeaderboardManager : MonoBehaviour
                 t.Seconds, 
                 t.Milliseconds);
 
-                scores[a].text = str;
+                scores[a].text = msg[i].Score.ToString();
                 a++;
             }
         }));
