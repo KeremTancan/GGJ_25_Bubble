@@ -8,6 +8,11 @@ public class TogglePanel : MonoBehaviour
 
     private static List<GameObject> panels;
 
+    public static List<GameObject> Panels()
+    {
+        return panels;
+    }
+
     void Awake()
     {
         if (panels == null || panels.Count == 0)

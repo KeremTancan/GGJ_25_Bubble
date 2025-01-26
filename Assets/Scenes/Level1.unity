@@ -123,56 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &152608273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3865251675552936425, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &152608280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152608273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 152608280}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Milk
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 152608280}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &162589194
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,56 +678,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &735224141 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3288579821102378161, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &735224148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735224141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 735224148}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deneme
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 735224148}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &770934046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,42 +801,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5324315371007046009, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820013906571682621, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3c59e1a4ab3643e1aa13bef0e0e8842,
+        type: 3}
+    - target: {fileID: 5820013906571682621, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917455172274448859, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917455172274448859, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917455172274448859, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 350666269870954719, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 904542517}
-    - targetCorrespondingSourceObject: {fileID: 7080311757186335129, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2026887222}
-    - targetCorrespondingSourceObject: {fileID: 3865251675552936425, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 152608280}
-    - targetCorrespondingSourceObject: {fileID: 2650930311390273519, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1938682619}
-    - targetCorrespondingSourceObject: {fileID: 1741952971719134638, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1570883758}
-    - targetCorrespondingSourceObject: {fileID: 3288579821102378161, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 735224148}
-    - targetCorrespondingSourceObject: {fileID: 8853234898344537973, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1623414160}
-    - targetCorrespondingSourceObject: {fileID: 5531542602090327684, guid: 5e595f995c067024680fc6c7585834c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1847071579}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e595f995c067024680fc6c7585834c9, type: 3}
 --- !u!1 &832575517
 GameObject:
@@ -987,56 +886,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &904542511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 350666269870954719, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &904542517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904542511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 904542517}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Clear Drink
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 904542517}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &920577075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,256 +917,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 336456456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1570883751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1741952971719134638, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1570883758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570883751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1570883758}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deneme
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1570883758}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1623414153 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8853234898344537973, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1623414160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623414153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1623414160}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deneme
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1623414160}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1847071572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5531542602090327684, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1847071579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847071572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1847071579}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deneme
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1847071579}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1938682612 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2650930311390273519, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1938682619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938682612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1938682619}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deneme
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1938682619}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &2026887217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7080311757186335129, guid: 5e595f995c067024680fc6c7585834c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 770934046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2026887222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026887217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.2
-  duration: 0.2
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2026887222}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextWithStringHoverEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Serve Drink
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2026887222}
-        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
-        m_MethodName: PopUpTextHoverExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &2089747073
 GameObject:
   m_ObjectHideFlags: 0
