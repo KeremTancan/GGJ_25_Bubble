@@ -83,6 +83,7 @@ public class Customer : MonoBehaviour
 
     public void PlayExitingAnimation(bool isHappy, Action onComplete)
     {
+        waitingBarGO.SetActive(false);
         if (isHappy)
         {
             BeHappy(() =>
