@@ -3130,6 +3130,7 @@ GameObject:
   - component: {fileID: 6177509301912070080}
   - component: {fileID: 845834198023913027}
   - component: {fileID: 4755874363969571668}
+  - component: {fileID: 6936848064992804445}
   m_Layer: 5
   m_Name: OrderParentToggleBtn
   m_TagString: Untagged
@@ -3250,6 +3251,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32eb02c410b14227810ce1904cea789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6936848064992804445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625422385885214755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7538d6f1ecf4a67478d02f64b8ebb6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.2
+  duration: 0.2
+  OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6936848064992804445}
+        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
+        m_MethodName: PopUpTextWithStringHoverEnter
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Order List
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHoverExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6936848064992804445}
+        m_TargetAssemblyTypeName: UIHoverEffect, Assembly-CSharp
+        m_MethodName: PopUpTextHoverExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8641897405584514977
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,8 +29,16 @@ public class DrinkManager : MonoSingleton<DrinkManager>
         var ingredients = order.GetAllIngredients();
         for (int i = 0; i < ingredientImages.Length; i++)
         {
-            
-            ingredientImages[i].sprite = ingredients[i]!=null ? ingredients[i].drinkSprite : null;
+            if (ingredients[i]!=null)
+            {
+                ingredientImages[i].sprite = ingredients[i].drinkSprite;
+                ingredientImages[i].color = Color.white;
+            }
+            else
+            {
+                ingredientImages[i].sprite = null;
+                ingredientImages[i].color = Color.clear;
+            }
         }
     }
 }

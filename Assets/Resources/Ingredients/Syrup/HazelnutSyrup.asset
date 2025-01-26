@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Hazelnut Syrup
   ingredientType: 4
   supplySprite: {fileID: -845423163, guid: 2e9d6ad5f76534eda8dffcc38f90a094, type: 3}
-  drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}
+  drinkSprite: {fileID: 21300000, guid: 5cfbb22537468d14da21bd9c3e595583, type: 3}

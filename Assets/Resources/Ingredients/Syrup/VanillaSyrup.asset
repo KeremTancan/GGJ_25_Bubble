@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Vanilla Syrup
   ingredientType: 4
   supplySprite: {fileID: 358950165, guid: 3bff2e5f9838c4d7cba044649e28160f, type: 3}
-  drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}
+  drinkSprite: {fileID: 21300000, guid: 417cd689cf429ec43983dd0d51759681, type: 3}

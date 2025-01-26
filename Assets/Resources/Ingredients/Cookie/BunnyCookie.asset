@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Bunny Cookie
   ingredientType: 6
   supplySprite: {fileID: 63709491, guid: 668ce7c94b71d4b18bfec0bbc8fbf36a, type: 3}
-  drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}
+  drinkSprite: {fileID: 63709491, guid: 668ce7c94b71d4b18bfec0bbc8fbf36a, type: 3}

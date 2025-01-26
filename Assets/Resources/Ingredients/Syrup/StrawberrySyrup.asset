@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Strawberry Syrup
   ingredientType: 4
   supplySprite: {fileID: -1803249620, guid: 0b4fa43dc43f043fb80b85e13951776d, type: 3}
-  drinkSprite: {fileID: 21300000, guid: 4f554405f8f06164db0773d689da243c, type: 3}
+  drinkSprite: {fileID: 21300000, guid: 476cb0bca9e3d734eb89fa211c3fdc28, type: 3}
