@@ -5,9 +5,12 @@ using UnityEngine;
 public class TimeManagerUI : MonoSingleton<TimeManagerUI>
 {
     [SerializeField] private GameObject[] customerWaitingBars;
-
+    
     public GameObject[] GetCustomerWaitingBars()
     {
         return customerWaitingBars;
     }
+
+   
 }
+

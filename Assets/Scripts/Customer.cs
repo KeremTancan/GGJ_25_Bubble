@@ -17,8 +17,9 @@ public class Customer : MonoBehaviour
 
     public int index = -1; // Hangi bekleme barıyla ilişkili olduğunu tutar
     public Image waitingBar; // Bekleme çubuğu
+    public Image faceExpression; // Yüz ifadesi için görsel
 
-    public event Action OnCustomerDestroyed; // Müşteri yok olduğunda tetiklenecek olay
+    public event Action OnCustomerDestroyed;
 
     Order order;
 
@@ -39,7 +40,7 @@ public class Customer : MonoBehaviour
 
         remainingWaitingTime = maxWaitingTime;
 
-        // Doğru bekleme çubuğunu al
+        // Doğru bekleme çubuğunu ve yüz ifadesini al
         if (index >= 0)
         {
             GameObject barObject = TimeManagerUI.Instance(false).GetCustomerWaitingBars()[index];
@@ -49,6 +50,12 @@ public class Customer : MonoBehaviour
         if (waitingBar != null)
         {
             waitingBar.fillAmount = 1f; // Çubuğu tam doldur
+            waitingBar.color = Color.green; // İlk renk yeşil
+        }
+
+        if (faceExpression != null)
+        {
+            faceExpression.sprite = GetHappyFace(); // İlk yüz ifadesi mutlu
         }
 
         StartCoroutine(WaitingCountdown());
@@ -128,6 +135,24 @@ public class Customer : MonoBehaviour
             if (waitingBar != null)
             {
                 waitingBar.fillAmount = remainingWaitingTime / maxWaitingTime;
+
+                // Renk güncellemesi
+                float percentage = remainingWaitingTime / maxWaitingTime;
+                if (percentage > 0.5f)
+                {
+                    waitingBar.color = Color.green; // %50'den fazla süre kaldıysa yeşil
+                    if (faceExpression != null) faceExpression.sprite = GetHappyFace(); // Mutlu yüz ifadesi
+                }
+                else if (percentage > 0.2f)
+                {
+                    waitingBar.color = Color.yellow; // %20-%50 arası süre kaldıysa sarı
+                    if (faceExpression != null) faceExpression.sprite = GetNeutralFace(); // Bıkkın yüz ifadesi
+                }
+                else
+                {
+                    waitingBar.color = Color.red; // %20'den az süre kaldıysa kırmızı
+                    if (faceExpression != null) faceExpression.sprite = GetAngryFace(); // Sinirli yüz ifadesi
+                }
             }
         }
 
@@ -138,8 +163,6 @@ public class Customer : MonoBehaviour
             GameManager.Instance(false).RemoveWaitedCustomer(this);
         }
     }
-
-
 
     public void DeliverOrder()
     {
@@ -152,4 +175,21 @@ public class Customer : MonoBehaviour
             Destroy(gameObject);
         });
     }
+
+    // Yüz ifadesi sprite'larını almak için metotlar
+    private Sprite GetHappyFace()
+    {
+        return Resources.Load<Sprite>("Faces/HappyFace"); // Mutlu yüz sprite yolu
+    }
+
+    private Sprite GetNeutralFace()
+    {
+        return Resources.Load<Sprite>("Faces/NeutralFace"); // Bıkkın yüz sprite yolu
+    }
+
+    private Sprite GetAngryFace()
+    {
+        return Resources.Load<Sprite>("Faces/AngryFace"); // Sinirli yüz sprite yolu
+    }
 }
+    
