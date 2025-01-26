@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class TogglePanel : MonoBehaviour
     public GameObject panel;
 
     private static List<GameObject> panels;
+    
+    public static Action OnTogglePanel;
+    
+    
 
     public static List<GameObject> Panels()
     {
@@ -54,6 +59,17 @@ public class TogglePanel : MonoBehaviour
         else
         {
             panel.SetActive(false);
+        }
+        
+        OnTogglePanel?.Invoke();
+    }
+
+
+    public static void CloseAllPanels()
+    {
+        foreach (var pnl in panels)
+        {
+            pnl.SetActive(false);
         }
     }
 }

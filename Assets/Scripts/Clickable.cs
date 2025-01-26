@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Clickable : MonoBehaviour
 {
+    public static Action OnClickableClicked;
     void Start()
     {
         var buttons = GetComponents<Button>();
@@ -30,5 +32,7 @@ public class Clickable : MonoBehaviour
         {
             pnl.SetActive(false);
         }
+
+        OnClickableClicked?.Invoke();
     }
 }

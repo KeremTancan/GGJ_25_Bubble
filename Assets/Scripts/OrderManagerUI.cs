@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,8 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
 {
     [SerializeField] GameObject orderUIPrefab;
     [SerializeField] Transform orderGroup;
-    [SerializeField] Transform orderParent;
+    [SerializeField] RectTransform orderParent;
+    Vector3 initPosOrderParent;
     [SerializeField] Button orderParentToggleBtn;
     
     [SerializeField] List<OrderUI> orderUIList = new List<OrderUI>();
@@ -16,8 +18,11 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     protected override void Awake()
     {
         base.Awake();
+        initPosOrderParent = orderParent.localPosition;
         Customer.OnAnyCustomerGenerated += Customer_OnAnyCustomerGenerated;
         GameManager.Instance().OnCustomerOrderMade += GameManager_OnCustomerOrderMade;
+        TogglePanel.OnTogglePanel += OnUIClicked;
+        Clickable.OnClickableClicked += OnUIClicked;
         orderParentToggleBtn.onClick.AddListener(OrderParentToggle);
     }
 
@@ -28,6 +33,8 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
         {
             GameManager.Instance().OnCustomerOrderMade -= GameManager_OnCustomerOrderMade;
         }
+        TogglePanel.OnTogglePanel -= OnUIClicked;
+        Clickable.OnClickableClicked += OnUIClicked;
     }
     
     void GameManager_OnCustomerOrderMade(Customer finishedCustomer)
@@ -60,8 +67,28 @@ public class OrderManagerUI : MonoSingleton<OrderManagerUI>
     }
 
     
+    
+    bool toggle = false;
     void OrderParentToggle()
     {
-        orderParent.gameObject.SetActive(!orderParent.gameObject.activeSelf);
+        toggle = !toggle;
+        if (toggle)
+        {
+            orderParent.DOLocalMove(Vector3.zero, 0.5f);
+            //
+            TogglePanel.CloseAllPanels();
+        }
+        else
+        {
+            orderParent.DOLocalMove(initPosOrderParent, 0.5f);
+        }
+    }
+
+    void OnUIClicked()
+    {
+        if (toggle)
+        {
+            OrderParentToggle();
+        }
     }
 }
