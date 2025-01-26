@@ -16,8 +16,9 @@ public class Customer : MonoBehaviour
     private bool isWaiting = true;
 
     public int index = -1; // Hangi bekleme barıyla ilişkili olduğunu tutar
-    public Image waitingBar; // Bekleme çubuğu
-    public Image faceExpression; // Yüz ifadesi için görsel
+    public GameObject waitingBarGO;
+    private Image face;
+    private Image waitingBar;
 
     public event Action OnCustomerDestroyed;
 
@@ -32,6 +33,9 @@ public class Customer : MonoBehaviour
         GetOrder();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         customerAnimation = GetComponent<CustomerAnimation>();
+        
+        int xCoord = (int)transform.position.x;
+        index = Math.Sign(xCoord) + 1;
 
         PlayEnteringAnimation(() =>
         {
@@ -43,8 +47,10 @@ public class Customer : MonoBehaviour
         // Doğru bekleme çubuğunu ve yüz ifadesini al
         if (index >= 0)
         {
-            GameObject barObject = TimeManagerUI.Instance(false).GetCustomerWaitingBars()[index];
-            waitingBar = barObject.GetComponent<Image>();
+            waitingBarGO = TimeManagerUI.Instance(false).GetCustomerWaitingBars()[index];
+            waitingBarGO.SetActive(true);
+            waitingBar = waitingBarGO.transform.Find("FillBar").GetComponent<Image>();
+            face = waitingBarGO.transform.Find("Face").GetComponent<Image>();
         }
 
         if (waitingBar != null)
@@ -53,12 +59,19 @@ public class Customer : MonoBehaviour
             waitingBar.color = Color.green; // İlk renk yeşil
         }
 
-        if (faceExpression != null)
+        if (face != null)
         {
-            faceExpression.sprite = GetHappyFace(); // İlk yüz ifadesi mutlu
+            face.sprite = GetHappyFace(); // İlk yüz ifadesi mutlu
         }
 
-        StartCoroutine(WaitingCountdown());
+        
+
+        //StartCoroutine(WaitingCountdown());
+    }
+
+    void Update()
+    {
+        WaitingCountdown();
     }
 
     public void PlayEnteringAnimation(Action onComplete)
@@ -125,12 +138,11 @@ public class Customer : MonoBehaviour
         return order;
     }
 
-    private IEnumerator WaitingCountdown()
+    private void WaitingCountdown()
     {
-        while (remainingWaitingTime > 0 && isWaiting)
+        if(isWaiting && remainingWaitingTime > 0)
         {
-            yield return new WaitForSeconds(1f);
-            remainingWaitingTime--;
+            remainingWaitingTime-= Time.deltaTime;
 
             if (waitingBar != null)
             {
@@ -141,17 +153,17 @@ public class Customer : MonoBehaviour
                 if (percentage > 0.5f)
                 {
                     waitingBar.color = Color.green; // %50'den fazla süre kaldıysa yeşil
-                    if (faceExpression != null) faceExpression.sprite = GetHappyFace(); // Mutlu yüz ifadesi
+                    if (face != null) face.sprite = GetHappyFace(); // Mutlu yüz ifadesi
                 }
                 else if (percentage > 0.2f)
                 {
                     waitingBar.color = Color.yellow; // %20-%50 arası süre kaldıysa sarı
-                    if (faceExpression != null) faceExpression.sprite = GetNeutralFace(); // Bıkkın yüz ifadesi
+                    if (face != null) face.sprite = GetNeutralFace(); // Bıkkın yüz ifadesi
                 }
                 else
                 {
                     waitingBar.color = Color.red; // %20'den az süre kaldıysa kırmızı
-                    if (faceExpression != null) faceExpression.sprite = GetAngryFace(); // Sinirli yüz ifadesi
+                    if (face != null) face.sprite = GetAngryFace(); // Sinirli yüz ifadesi
                 }
             }
         }
@@ -166,6 +178,7 @@ public class Customer : MonoBehaviour
 
     public void DeliverOrder()
     {
+        waitingBarGO.SetActive(false);
         isWaiting = false;
 
         // Mutlu müşteri animasyonu oynat ve yok et

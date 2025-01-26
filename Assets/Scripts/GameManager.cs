@@ -89,40 +89,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         // Instantiate the customer at the available spawn point
         Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
-
-        // Calculate the index based on the spawn point's x-coordinate
-        int xCoord = (int)availableSpawnPoint.x;
-        newCustomer.index = Math.Sign(xCoord) + 1;
-
-        // Assign the corresponding waiting bar from TimeManagerUI
-        Transform customerWaitingParent = TimeManagerUI.Instance(false).transform.Find("CustomerWaitingParent");
-        if (customerWaitingParent != null && newCustomer.index >= 0 && newCustomer.index < customerWaitingParent.childCount)
-        {
-            Transform waitingBarTransform = customerWaitingParent.GetChild(newCustomer.index);
-            newCustomer.waitingBar = waitingBarTransform.GetComponent<Image>();
-
-            // Initialize the waiting bar's state
-            if (newCustomer.waitingBar != null)
-            {
-                newCustomer.waitingBar.fillAmount = 1f;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No matching waiting bar found for customer index: " + newCustomer.index);
-        }
-
-        // Mark the spawn point as occupied
-        spawnPointAvailability[availableSpawnPoint] = false;
-
-        // Müşteri yok olduğunda spawn noktasını boşalt
-        newCustomer.OnCustomerDestroyed += () =>
-        {
-            spawnPointAvailability[availableSpawnPoint] = true; // Spawn noktası tekrar kullanılabilir
-            customers.Remove(newCustomer); // Müşteriyi listeden kaldır
-        };
-
-        // Add the new customer to the list
         customers.Add(newCustomer);
         return true;
     }
@@ -178,27 +144,6 @@ public class GameManager : MonoSingleton<GameManager>
 
         customers.Remove(waitedCustomer);
     }
-
-
-
-
-    public void RemoveFailedOrder(Order failedOrder)
-    {
-        Debug.Log($"Removing failed order: {failedOrder}");
-
-        foreach (var _cust in customers)
-        {
-            if (_cust.GetOrder() == failedOrder)
-            {
-                RemoveWaitedCustomer(_cust); 
-                break;
-            }
-        }
-    }
-
-
-    
-    
 
     bool CheckOrder(Order order, out Customer finishedCustomer)
     {

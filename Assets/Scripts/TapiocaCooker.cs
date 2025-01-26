@@ -105,7 +105,7 @@ public class TapiocaCooker : MonoBehaviour
         panImage.gameObject.SetActive(true);
         panImage.sprite = rawPanSprite;
         cookingProgressBar.gameObject.SetActive(true);
-        cookingProgressBar.fillAmount = 0f;
+        //cookingProgressBar.fillAmount = 0f;
         
         // Disable the button while cooking
         cookButton.interactable = false;
@@ -121,7 +121,7 @@ public class TapiocaCooker : MonoBehaviour
         {
             currentCookingTime += Time.deltaTime;
             float progress = currentCookingTime / cookingTime;
-            float rotationAngle = progress * 360f; // Full rotation in degrees
+            float rotationAngle = progress * 315f; // Full rotation in degrees
 
             // Rotate the clock hand around its pivot point
             cookingProgressBar.transform.localRotation = Quaternion.Euler(0, 0, -rotationAngle);
