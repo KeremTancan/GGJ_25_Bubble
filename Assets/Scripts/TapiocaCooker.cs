@@ -112,7 +112,7 @@ public class TapiocaCooker : MonoBehaviour
 
         // Animate the pan appearing
         panImage.transform.localScale = Vector3.zero;
-        panImage.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
+        panImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBounce);
     }
 
     private void Update()
@@ -120,7 +120,11 @@ public class TapiocaCooker : MonoBehaviour
         if (isCooking)
         {
             currentCookingTime += Time.deltaTime;
-            cookingProgressBar.fillAmount = currentCookingTime / cookingTime;
+            float progress = currentCookingTime / cookingTime;
+            float rotationAngle = progress * 360f; // Full rotation in degrees
+
+            // Rotate the clock hand around its pivot point
+            cookingProgressBar.transform.localRotation = Quaternion.Euler(0, 0, -rotationAngle);
 
             if (currentCookingTime >= cookingTime)
             {
