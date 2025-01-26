@@ -5,7 +5,6 @@ using UnityEngine;
 public enum IngredientType
 {
     Tapioca,
-    
     Milk,
     Tea_Coffee,
     Sugar,

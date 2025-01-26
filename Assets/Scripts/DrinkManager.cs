@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,12 @@ using UnityEngine.UI;
 
 public class DrinkManager : MonoSingleton<DrinkManager>
 {
-    [SerializeField] private Transform drinkParent;
-    Image[] ingredientImages;
-    
+    [SerializeField] Image[] ingredientImages;
     Order order;
 
     void OnEnable()
     {
         GameManager.Instance().OnAddedIngredientToDrink += GameManager_OnAddedIngredientToDrink;
-        ingredientImages = drinkParent.GetComponentsInChildren<Image>();
     }
 
     void OnDisable()
@@ -27,9 +25,9 @@ public class DrinkManager : MonoSingleton<DrinkManager>
     void GameManager_OnAddedIngredientToDrink(Order order)
     {
         var ingredients = order.GetAllIngredients();
-        for (int i = 0; i < ingredientImages.Length; i++)
+        for (int i = 0; i < ingredients.Length; i++)
         {
-            if (ingredients[i]!=null)
+            if (ingredients[i]!=null && ingredients[i].drinkSprite != null)
             {
                 ingredientImages[i].sprite = ingredients[i].drinkSprite;
                 ingredientImages[i].color = Color.white;
