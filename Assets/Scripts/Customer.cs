@@ -9,7 +9,7 @@ using DG.Tweening;
 public class Customer : MonoBehaviour
 {
     public static Action<Customer> OnAnyCustomerGenerated;
-    public static Action<Customer> OnCustomerDestroyedWithOrder; // Yeni olay: Müşteri yok olurken tetiklenir
+    public static Action<Customer> OnCustomerDestroyedWithOrder; // Yeni event: Order'ı silmek için
 
     public float maxWaitingTime = 22f;
     private float remainingWaitingTime;
@@ -125,7 +125,6 @@ public class Customer : MonoBehaviour
             yield return new WaitForSeconds(1f);
             remainingWaitingTime--;
 
-            // Bekleme çubuğunu güncelle
             if (waitingBar != null)
             {
                 waitingBar.fillAmount = remainingWaitingTime / maxWaitingTime;
@@ -136,15 +135,11 @@ public class Customer : MonoBehaviour
         {
             isWaiting = false;
 
-            // Önce angry animasyonu oyna, ardından order'ı sil ve yok et
-            BeAngry(() =>
-            {
-                OnCustomerDestroyedWithOrder?.Invoke(this); // Order'ı silmek için olay tetiklenir
-                OnCustomerDestroyed?.Invoke();
-                Destroy(gameObject);
-            });
+            GameManager.Instance(false).RemoveWaitedCustomer(this);
         }
     }
+
+
 
     public void DeliverOrder()
     {
@@ -153,7 +148,6 @@ public class Customer : MonoBehaviour
         // Mutlu müşteri animasyonu oynat ve yok et
         PlayExitingAnimation(true, () =>
         {
-            OnCustomerDestroyedWithOrder?.Invoke(this); // Order'ı silmek için olay tetiklenir
             OnCustomerDestroyed?.Invoke();
             Destroy(gameObject);
         });
