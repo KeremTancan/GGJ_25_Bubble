@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Tapioca
   ingredientType: 0
-  supplySprite: {fileID: 21300000, guid: a08987b48c546490e9b51bc203247e19, type: 3}
+  supplySprite: {fileID: 21300000, guid: 0a469c9ae089340058c318a6d76e6bf0, type: 3}
   drinkSprite: {fileID: 21300000, guid: 1e8857c436c29024c82abece22a3146f, type: 3}
