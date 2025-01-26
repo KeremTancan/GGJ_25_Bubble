@@ -53,6 +53,7 @@ public class GameManager : MonoSingleton<GameManager>
     
     private Vector3 GetFirstAvailableSpawnPoint()
     {
+        
         foreach (var entry in spawnPointAvailability)
         {
             if (entry.Value) // If the spawn point is available
@@ -87,6 +88,9 @@ public class GameManager : MonoSingleton<GameManager>
         {
             // Instantiate the customer at the available spawn point
             Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
+            
+            int xCoord = (int)availableSpawnPoint.x;
+            newCustomer.index = Math.Sign(xCoord)+1;
         
             // Mark the spawn point as occupied
             spawnPointAvailability[availableSpawnPoint] = false;
@@ -130,9 +134,17 @@ public class GameManager : MonoSingleton<GameManager>
             //customers.Remove(finishedCustomer);
             FreeSpawnPoint(finishedCustomer.transform);
             Destroy(finishedCustomer.gameObject);});
-        
-        
     }
+
+    public void RemoveWaitedCustomer(Customer waitedCustomer)
+    {
+        OnCustomerOrderMade?.Invoke(waitedCustomer);
+        waitedCustomer.PlayExitingAnimation(false,()=>{
+            FreeSpawnPoint(waitedCustomer.transform);
+            Destroy(waitedCustomer.gameObject);});
+    }
+    
+    
 
     bool CheckOrder(Order order, out Customer finishedCustomer)
     {
