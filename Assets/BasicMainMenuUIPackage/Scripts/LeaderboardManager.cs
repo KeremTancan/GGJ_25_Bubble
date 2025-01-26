@@ -6,12 +6,14 @@ using TMPro;
 
 using Dan.Main;
 using System;
+using UnityEngine.UI;
 
 public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField] List<TextMeshProUGUI> names;
     [SerializeField] List<TextMeshProUGUI> scores;
 
+    [SerializeField] private TextMeshProUGUI yourBestScore;
     
     public static LeaderboardManager Instance;
 
@@ -32,8 +34,8 @@ public class LeaderboardManager : MonoBehaviour
         }
     }
 
-    private void Start() {
-        
+    private void OnEnable() {
+        yourBestScore.text = "Your Best Score: " + PlayerPrefs.GetInt("BestScore");
     }
 
 
