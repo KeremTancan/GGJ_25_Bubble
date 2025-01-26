@@ -19,8 +19,9 @@ public class OrderUI : MonoBehaviour
     {
         this.customer = customer;
         SetOrder(customer.GetOrder());
-        //UpdateVisual();
+        UpdateVisual();
     }
+
     
     public Order GetOrder()
     {
@@ -45,4 +46,6 @@ public class OrderUI : MonoBehaviour
             childText.text = order.GetAllIngredients()[i].ingredientName;
         }
     }
+    
+    
 }

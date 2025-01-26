@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 using Spine.Unity;
 using Spine;
 using DG.Tweening;
-using UnityEngine.UI; // UI için gerekli
 
 public class Customer : MonoBehaviour
 {
     public static Action<Customer> OnAnyCustomerGenerated;
+    public static Action<Customer> OnCustomerDestroyedWithOrder; // Yeni olay: Müşteri yok olurken tetiklenir
 
-    public float maxWaitingTime = 22f; 
+    public float maxWaitingTime = 22f;
     private float remainingWaitingTime;
     private bool isWaiting = true;
-    public int index = -1;
 
-    public Image waitingBar; 
+    public int index = -1; // Hangi bekleme barıyla ilişkili olduğunu tutar
+    public Image waitingBar; // Bekleme çubuğu
+
+    public event Action OnCustomerDestroyed; // Müşteri yok olduğunda tetiklenecek olay
 
     Order order;
 
@@ -29,17 +31,24 @@ public class Customer : MonoBehaviour
         GetOrder();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         customerAnimation = GetComponent<CustomerAnimation>();
-        
+
         PlayEnteringAnimation(() =>
         {
             OnAnyCustomerGenerated?.Invoke(this);
         });
 
-       
         remainingWaitingTime = maxWaitingTime;
+
+        // Doğru bekleme çubuğunu al
+        if (index >= 0)
+        {
+            GameObject barObject = TimeManagerUI.Instance(false).GetCustomerWaitingBars()[index];
+            waitingBar = barObject.GetComponent<Image>();
+        }
+
         if (waitingBar != null)
         {
-            waitingBar.fillAmount = 1f; 
+            waitingBar.fillAmount = 1f; // Çubuğu tam doldur
         }
 
         StartCoroutine(WaitingCountdown());
@@ -67,7 +76,6 @@ public class Customer : MonoBehaviour
                 transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBounce).OnComplete(() => { onComplete?.Invoke(); });
             });
         }
-        
     }
 
     public void AddIdleAnimation()
@@ -110,14 +118,14 @@ public class Customer : MonoBehaviour
         return order;
     }
 
-    
     private IEnumerator WaitingCountdown()
     {
         while (remainingWaitingTime > 0 && isWaiting)
         {
-            yield return new WaitForSeconds(1f); 
+            yield return new WaitForSeconds(1f);
             remainingWaitingTime--;
 
+            // Bekleme çubuğunu güncelle
             if (waitingBar != null)
             {
                 waitingBar.fillAmount = remainingWaitingTime / maxWaitingTime;
@@ -127,8 +135,27 @@ public class Customer : MonoBehaviour
         if (remainingWaitingTime <= 0)
         {
             isWaiting = false;
-            GameManager.Instance().RemoveWaitedCustomer(this);
-            yield break;
+
+            // Önce angry animasyonu oyna, ardından order'ı sil ve yok et
+            BeAngry(() =>
+            {
+                OnCustomerDestroyedWithOrder?.Invoke(this); // Order'ı silmek için olay tetiklenir
+                OnCustomerDestroyed?.Invoke();
+                Destroy(gameObject);
+            });
         }
+    }
+
+    public void DeliverOrder()
+    {
+        isWaiting = false;
+
+        // Mutlu müşteri animasyonu oynat ve yok et
+        PlayExitingAnimation(true, () =>
+        {
+            OnCustomerDestroyedWithOrder?.Invoke(this); // Order'ı silmek için olay tetiklenir
+            OnCustomerDestroyed?.Invoke();
+            Destroy(gameObject);
+        });
     }
 }
