@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -277,6 +277,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &313113084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4937140811388321049, guid: 5e595f995c067024680fc6c7585834c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 770934046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &486935991
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1116,6 +1128,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 498349299}
+    - targetCorrespondingSourceObject: {fileID: 1440775424285719797, guid: 5e595f995c067024680fc6c7585834c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1653823797}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e595f995c067024680fc6c7585834c9, type: 3}
 --- !u!1 &832575517
@@ -1204,6 +1220,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 336456456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &926494200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949019100238958266, guid: 5e595f995c067024680fc6c7585834c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 770934046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1233313888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1305,78 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &1293688207 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1440775424285719797, guid: 5e595f995c067024680fc6c7585834c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 770934046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1293688212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2039326441602286412, guid: 5e595f995c067024680fc6c7585834c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 770934046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1653823796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653823797}
+  - component: {fileID: 1653823798}
+  m_Layer: 5
+  m_Name: TapiocaCooker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1653823797
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653823796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1293688207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1653823798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653823796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fcfade572084f329c82c4517413565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookButton: {fileID: 1293688212}
+  cookingProgressBar: {fileID: 313113084}
+  panImage: {fileID: 926494200}
+  rawPanSprite: {fileID: 245463713, guid: d618a852362f74d2490b4b1c9bc80b20, type: 3}
+  cookedPanSprite: {fileID: 1239299239, guid: dc830ac1dbd1344cbac0d75cd059252c, type: 3}
+  cookingTime: 5
 --- !u!1 &2089747073
 GameObject:
   m_ObjectHideFlags: 0
