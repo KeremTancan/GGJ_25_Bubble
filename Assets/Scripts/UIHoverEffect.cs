@@ -15,7 +15,9 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private float originalMinHeight; 
     private LayoutElement layoutElement;
 
-    private GameObject hoverTextGO;
+    private static GameObject hoverTextGO;
+    private IngredientButton ingredientButton;
+    private TextMeshProUGUI hoverText;
     
     
     
@@ -36,12 +38,34 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         originalMinWidth = layoutElement.minWidth;
         originalMinHeight = layoutElement.minHeight;
-
-        hoverTextGO = GameObject.Find("HoverText");
+        
+        if (TryGetComponent<IngredientButton>(out ingredientButton))
+        {
+            OnHoverEnter.AddListener(PopUpTextHoverEnter);
+            OnHoverExit.AddListener(PopUpTextHoverExit); 
+        }
+        
         if (hoverTextGO!=null)
         {
             hoverTextGO.SetActive(false);
         }
+        else
+        {
+            hoverTextGO = GameObject.Find("HoverText");
+            if (hoverTextGO==null)
+            {
+                Debug.LogError("BULAMADIM");
+                return;
+            }
+        }
+        hoverText = hoverTextGO.GetComponentInChildren<TextMeshProUGUI>();
+        
+    }
+
+    void OnDestroy()
+    {
+        OnHoverEnter.RemoveAllListeners();
+        OnHoverExit.RemoveAllListeners();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -63,24 +87,25 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             layoutElement.minHeight = originalMinHeight;
         }
     }
-
-    public void PopUpTextHoverEnter()
+    
+    public void PopUpTextWithStringHoverEnter(string message)
     {
-        if (hoverTextGO == null)
+        if (hoverTextGO == null || hoverText == null)
         {
             return;
         }
         hoverTextGO.SetActive(true);    
-        var ingredientButton = GetComponent<IngredientButton>();
-        var hoverText = hoverTextGO.GetComponentInChildren<TextMeshProUGUI>();
-        if (ingredientButton != null && hoverText != null)
+        hoverText.text = message;
+    }
+
+    public void PopUpTextHoverEnter()
+    {
+        if (hoverTextGO == null || ingredientButton == null || hoverText == null)
         {
-            hoverText.text = ingredientButton.Ingredient.ingredientName;
+            return;
         }
-        else
-        {
-            hoverTextGO.SetActive(false);
-        }
+        hoverTextGO.SetActive(true);   
+        hoverText.text = ingredientButton.Ingredient.ingredientName;
     }
 
     public void PopUpTextHoverExit()
@@ -89,6 +114,7 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             return;
         }
+        hoverText.text = "";
         hoverTextGO.SetActive(false);
     }
     

@@ -19,6 +19,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] bool testOrderFinish = false;
     [SerializeField] Order order;
     
+    [SerializeField] Ingredient noIceSO;
+    
     public Order GetOrder { get { return order; } }
     protected override void Awake()
     {
@@ -28,6 +30,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             spawnPointAvailability.Add(spawnPoint.position, true); // All spawn points are available initially
         }
+        ClearOrder();
     }
     private void OnEnable()
     {
@@ -80,7 +83,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Vector3 availableSpawnPoint = GetFirstAvailableSpawnPoint();
     
-        if (availableSpawnPoint != Vector3.negativeInfinity && customers != null && customers.Count < 3)
+        if (availableSpawnPoint != Vector3.negativeInfinity && customers != null && customers.FindAll(e => e!=null).Count < 3)
         {
             // Instantiate the customer at the available spawn point
             Customer newCustomer = Instantiate(customerPrefab, availableSpawnPoint, Quaternion.identity);
@@ -122,11 +125,13 @@ public class GameManager : MonoSingleton<GameManager>
     void RemoveFinishedCustomer(Customer finishedCustomer)
     {
         OnCustomerOrderMade?.Invoke(finishedCustomer);
+        ClearOrder();
         finishedCustomer.PlayExitingAnimation(true,()=>{
-            customers.Remove(finishedCustomer);
+            //customers.Remove(finishedCustomer);
             FreeSpawnPoint(finishedCustomer.transform);
             Destroy(finishedCustomer.gameObject);});
-        ClearOrder();
+        
+        
     }
 
     bool CheckOrder(Order order, out Customer finishedCustomer)
@@ -176,7 +181,7 @@ public class GameManager : MonoSingleton<GameManager>
                 break;
             
             case IngredientType.Ice:
-                if (order.IceType == null && order.BottleType != null)
+                if ((order.IceType == noIceSO || order.IceType == null) && order.BottleType != null)
                 {
                     order.IceType = ingredient;
                     Debug.Log($"Set {ingredient.ingredientName} to {type}");
@@ -261,7 +266,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void ClearOrder()
     {
         order.TapiocaType = null;
-        order.IceType = null;
+        order.IceType = noIceSO;
         order.MilkType = null;
         order.TeaType = null;
         order.SugarType = null;
