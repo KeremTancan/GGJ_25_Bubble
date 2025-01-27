@@ -21,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Order.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/OrderManagerUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/OrderUI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ScoreManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TapiocaCooker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TimeManagerUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Utility/MonoSingleton.cs" root0="SKIP_HIGHLIGHTING" />
@@ -55,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1737876037432</updated>
       <workItem from="1737876040299" duration="8439000" />
+      <workItem from="1737989423696" duration="1405000" />
     </task>
     <servers />
   </component>

@@ -56,13 +56,13 @@ public class Customer : MonoBehaviour
 
         if (waitingBar != null)
         {
-            waitingBar.fillAmount = 1f; // Çubuğu tam doldur
-            waitingBar.color = Color.green; // İlk renk yeşil
+            waitingBar.fillAmount = 1f; 
+            waitingBar.color = new Color32(199, 212, 136, 255); 
         }
 
         if (face != null)
         {
-            face.sprite = GetHappyFace(); // İlk yüz ifadesi mutlu
+            face.sprite = GetHappyFace();
         }
 
         
@@ -154,20 +154,21 @@ public class Customer : MonoBehaviour
                 float percentage = remainingWaitingTime / maxWaitingTime;
                 if (percentage > 0.5f)
                 {
-                    waitingBar.color = Color.green; // %50'den fazla süre kaldıysa yeşil
-                    if (face != null) face.sprite = GetHappyFace(); // Mutlu yüz ifadesi
+                    waitingBar.color = new Color32(199, 212, 136, 255); 
+                    if (face != null) face.sprite = GetHappyFace(); 
                 }
                 else if (percentage > 0.2f)
                 {
-                    waitingBar.color = Color.yellow; // %20-%50 arası süre kaldıysa sarı
-                    if (face != null) face.sprite = GetNeutralFace(); // Bıkkın yüz ifadesi
+                    waitingBar.color = new Color32(242, 166, 44, 255); 
+                    if (face != null) face.sprite = GetNeutralFace(); 
                 }
                 else
                 {
-                    waitingBar.color = Color.red; // %20'den az süre kaldıysa kırmızı
-                    if (face != null) face.sprite = GetAngryFace(); // Sinirli yüz ifadesi
+                    waitingBar.color = new Color32(255, 41, 57, 255); 
+                    if (face != null) face.sprite = GetAngryFace();
                 }
             }
+
         }
 
         if (isWaiting && remainingWaitingTime <= 0)
@@ -179,20 +180,19 @@ public class Customer : MonoBehaviour
     }
 
 
-    // Yüz ifadesi sprite'larını almak için metotlar
     private Sprite GetHappyFace()
     {
-        return Resources.Load<Sprite>("Faces/HappyFace"); // Mutlu yüz sprite yolu
+        return Resources.Load<Sprite>("Faces/HappyFace"); 
     }
 
     private Sprite GetNeutralFace()
     {
-        return Resources.Load<Sprite>("Faces/NeutralFace"); // Bıkkın yüz sprite yolu
+        return Resources.Load<Sprite>("Faces/NeutralFace"); 
     }
 
     private Sprite GetAngryFace()
     {
-        return Resources.Load<Sprite>("Faces/AngryFace"); // Sinirli yüz sprite yolu
+        return Resources.Load<Sprite>("Faces/AngryFace"); 
     }
 }
     

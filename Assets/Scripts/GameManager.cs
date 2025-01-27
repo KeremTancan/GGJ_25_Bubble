@@ -27,7 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float gameTimer;
     
-    [SerializeField] float maxTime = 120;
+    [SerializeField] float maxTime = 180;
     
     public Order GetOrder { get { return order; } }
     protected override void Awake()
